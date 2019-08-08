@@ -43,6 +43,7 @@ for i in range(count_pat):
     step_row_str_res = str(step_row + 1 )
     step_row_str_name = str(step_row - 1)
     ws0['A' + step_row_str_name] = patient_list[i].name
+    ws0['D' + step_row_str_name] = 'Prob ' + patient_list[i].num_prob
     yrow = len(patient_list[i].tests)
     ''' В одну строчку убирается  9 тестов '''
     if yrow <= 9: # Если количество тестов меньше 9
@@ -108,7 +109,7 @@ for i in range(count_pat):
 
 file_name = latest_file[23:-3]
 #print(file_name)
-report_file_name = 'rep\ ' + file_name + 'xlsx'
+report_file_name = 'rep/ ' + file_name + 'xlsx'
 print(report_file_name)
 print('готово')
 
