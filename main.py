@@ -108,7 +108,7 @@ for i in range(count_pat):
 
 file_name = latest_file[23:-3]
 #print(file_name)
-report_file_name = 'rep\ ' + file_name + 'xlsx'
+report_file_name = 'rep/ ' + file_name + 'xlsx'
 print(report_file_name)
 print('готово')
 
