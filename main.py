@@ -73,6 +73,7 @@ for i in range(count_pat):
 
 
 sheets = ['']
+
 ''' Цикл отрисовывающий книги под каждого пациента'''
 for i in range(count_pat):
     k = str(patient_list[i].num_prob)
@@ -108,7 +109,6 @@ for i in range(count_pat):
     sheets.append(patient_name_sheet)
 
 file_name = latest_file[23:-3]
-#print(file_name)
 report_file_name = 'rep/ ' + file_name + 'xlsx'
 print(report_file_name)
 print('готово')

@@ -28,7 +28,6 @@ al[4] = Alignment(horizontal='center', vertical='center', wrap_text=True)
 bord_hor = Border(bottom=Side(border_style='thin', color='000000'))
 
 fill = PatternFill("solid", fgColor="DDDDDD")
-#fill = PatternFill(fill_type=None, start_color='FFFFFFFF',end_color='FF000000')
 
 
 '''Объединение ячеек'''

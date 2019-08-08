@@ -59,5 +59,4 @@ for row in testlist:
                 patient_list[num_pat].time = testlist[new_row][11]
 
 print('Обработано пациентов -', num_pat)
-#print(patient_list[treb].name, patient_list[treb].tests, patient_list[treb].results)
 
