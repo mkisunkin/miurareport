@@ -26,13 +26,21 @@ al[3] = Alignment(horizontal='center', vertical= 'center')
 al[4] = Alignment(horizontal='center', vertical='center', wrap_text=True)
 
 bord_hor = Border(bottom=Side(border_style='thin', color='000000'))
+bord_top = Border(top=Side(border_style='thin', color='000000'))
+bord_hor_left = Border(left=Side(border_style='thin', color='000000'),
+                       bottom=Side(border_style='thin', color='000000'))
+bord_hor_right = Border(right=Side(border_style='thin', color='000000'),
+                       bottom=Side(border_style='thin', color='000000'))
+bord_top_right = Border(right=Side(border_style='thin', color='000000'),
+                        top=Side(border_style='thin', color='000000'))
+bord_top_left = Border(left=Side(border_style='thin', color='000000'),
+                        top=Side(border_style='thin', color='000000'))
 
 fill = PatternFill("solid", fgColor="DDDDDD")
 
 
 '''Объединение ячеек'''
-def cells_merge(name):
-    ws = name
+def cells_merge(ws):
     ws.merge_cells('A6:I6')
     ws.merge_cells('A7:I7')
     ws.merge_cells('B9:D9')
@@ -52,37 +60,38 @@ def cells_merge(name):
     ws.merge_cells('G13:G14')
     ws.merge_cells('H13:I14')
 
-    ws.merge_cells('A47:C47')
+''' ws.merge_cells('A47:C47')
     ws.merge_cells('D47:E47')
     ws.merge_cells('F47:G47')
-    ws.merge_cells('H47:I47')
-
-    diap1 = ' '
-    diap2 = ' '
-    diap3 = ' '
+    ws.merge_cells('H47:I47')'''
 
 
-    for i in range(15,46):
-        k = str(i)
-        diap1 = str('A'+ k + ':D'+ k)
-        diap2 = str('E' + k + ':F' + k)
-        diap3 = str('H' + k + ':I' + k)
-        ws.merge_cells(diap1)
-        ws.merge_cells(diap2)
-        ws.merge_cells(diap3)
+'''Объединение ячеек для строчек в таблице'''
+def table_merge(ws, rows_table):
+        ws.merge_cells('A' + rows_table + ':D' + rows_table)
+        ws.merge_cells('E' + rows_table + ':F' + rows_table)
+        ws.merge_cells('H' + rows_table + ':I' + rows_table)
+
+'''Рамка для строчек в таблице'''
+def table_border(ws, rows_table):
+        ws['A' + rows_table].border = bord_hor_left
+        ws['B' + rows_table].border = bord_hor
+        ws['C' + rows_table].border = bord_hor
+        ws['D' + rows_table].border = bord_hor
+        ws['E' + rows_table].border = bord_hor_left
+        ws['F' + rows_table].border = bord_hor
+        ws['G' + rows_table].border = bord_hor_left
+        ws['H' + rows_table].border = bord_hor_left
+        ws['I' + rows_table].border = bord_hor_right
 
 '''Изображение'''
-def create_image(name):
-    ws = name
+def create_image(ws):
     img = Image('image002.png')
     ws.add_image(img, 'A1')
 
-
-
 '''Рамка'''
 
-def create_border(name):
-    ws = name
+def create_border(ws):
     ws['B9'].border = bord_hor
     ws['B10'].border = bord_hor
     ws['B11'].border = bord_hor
@@ -107,11 +116,22 @@ def create_border(name):
     ws['I9'].border = bord_hor
     ws['I10'].border = bord_hor
     ws['I11'].border = bord_hor
+    
+    table_border(ws, str(14))
+
+    ws['A13'].border = bord_top_left
+    ws['B13'].border = bord_top
+    ws['C13'].border = bord_top
+    ws['D13'].border = bord_top
+    ws['E13'].border = bord_top_left 
+    ws['F13'].border = bord_top 
+    ws['G13'].border = bord_top_left
+    ws['H13'].border = bord_top_left
+    ws['I13'].border = bord_top_right
 
 
 '''Текст'''
-def add_standart_text(name):
-    ws = name
+def add_standart_text(ws):
     ws['A6'] = 'Биохимический анализ крови'
     ws['A7'] = 'автоматический анализатор Miura, I.C.E. group'
     a6 = ws['A6']
@@ -163,16 +183,22 @@ def add_standart_text(name):
     ws['H13'].font = ft[4]
     ws['H13'].fill = fill
 
-    ws['A47'] = 'Дата выдачи результата:'
-    ws['A47'].alignment = al[2]
-    ws['A47'].font = ft[5]
-
-    ws['F47'] = 'Выполнил:'
-    ws['F47'].alignment = al[2]
-    ws['F47'].font = ft[5]
-
     ws['B10'] = 'амб'
     ws['B11'] = 'Обследование'
+
+def footer(ws, rows_footer):
+
+        ws.merge_cells('A' + rows_footer +':C'+ rows_footer)
+        ws.merge_cells('D' + rows_footer +':E'+ rows_footer)
+        ws.merge_cells('F' + rows_footer +':G'+ rows_footer)
+        ws.merge_cells('H' + rows_footer +':I'+ rows_footer)
+
+        ws['A'+ rows_footer] = 'Дата выдачи результата:'
+        ws['A' + rows_footer].alignment = al[2]
+        ws['A' + rows_footer].font = ft[5]
+        ws['F' + rows_footer] = 'Выполнил:'
+        ws['F' + rows_footer].alignment = al[2]
+        ws['F' + rows_footer].font = ft[5]
 
 
 
