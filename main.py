@@ -3,7 +3,7 @@ from openpyxl import load_workbook
 from openpyxl.drawing.image import Image
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
 from testxls import wb, ft, fill, al
-from testxls import create_table, table_merge, table_border, footer
+from testxls import Table
 import testxls
 from report import patient_list, num_pat, latest_file
 from other_const import table_symbol, tests_dick
@@ -21,7 +21,6 @@ doc_name = input()
 date_test = datetime.datetime.today()
 
 '''Заполнение первой страницы'''
-
 
 ws0.merge_cells('A1:I1')
 ws0['A1'] = 'Лабораторный отчет'
@@ -79,21 +78,27 @@ sheets = ['']
 for i in range(count_pat):
     k = str(patient_list[i].num_prob)
     
+    
     footer_row = str(16 + len(patient_list[i].tests))
     patient_name_sheet = 0
     patient_name_sheet = wb.create_sheet('Prob ' + k)
-    create_table(patient_name_sheet)
+    Table.cells_merge('',patient_name_sheet)
+    Table.add_image('',patient_name_sheet)
+    Table.add_standart_text('', patient_name_sheet)
+    Table.create_border('',patient_name_sheet)
+    Table.table_border('', patient_name_sheet, str(14))
+
     patient_name_sheet['B9'] = patient_list[i].name
     stp_row = 14
-    footer(patient_name_sheet, footer_row)
+    Table.footer('',patient_name_sheet, footer_row)
     patient_name_sheet['D' + footer_row ] = date_test.strftime("%d/%m/%Y")
     patient_name_sheet['H' + footer_row] = doc_name
     
     for j in range(len(patient_list[i].tests)):
         stp_row += 1
         stp_row_str = str(stp_row )
-        table_merge(patient_name_sheet, stp_row_str)
-        table_border(patient_name_sheet, stp_row_str)
+        Table.table_merge('',patient_name_sheet, stp_row_str)
+        Table.table_border('',patient_name_sheet, stp_row_str)
         patient_name_sheet['A' + stp_row_str] = tests_dick[patient_list[i].tests[j]][0]
         patient_name_sheet['A' + stp_row_str].font = ft[2]
         patient_name_sheet['E' + stp_row_str] = patient_list[i].results[j]
