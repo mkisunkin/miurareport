@@ -111,6 +111,6 @@ for i in range(count_pat):
 file_name = latest_file[23:-3]
 report_file_name = 'rep/ ' + file_name + 'xlsx'
 print(report_file_name)
-print('готово')
+print('Готово')
 
 wb.save(report_file_name)
