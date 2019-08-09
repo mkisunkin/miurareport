@@ -12,12 +12,13 @@ import os
 import glob
 
 
+table = Table()
+
 wb = Workbook()
 ws0 = wb.active
 
 print('Введите имя врача: ')
 doc_name = input()
-
 date_test = datetime.datetime.today()
 
 '''Заполнение первой страницы'''
@@ -28,8 +29,6 @@ ws0['A1'].font = ft[1]
 ws0['A1'].alignment = al[1]
 ws0.merge_cells('H2:I2')
 ws0['H2'] = date_test.strftime("%d/%m/%Y_ %H:%M")
-
-
 
 '''Отрисовка первой страницы'''
 
@@ -82,23 +81,23 @@ for i in range(count_pat):
     footer_row = str(16 + len(patient_list[i].tests))
     patient_name_sheet = 0
     patient_name_sheet = wb.create_sheet('Prob ' + k)
-    Table.cells_merge('',patient_name_sheet)
-    Table.add_image('',patient_name_sheet)
-    Table.add_standart_text('', patient_name_sheet)
-    Table.create_border('',patient_name_sheet)
-    Table.table_border('', patient_name_sheet, str(14))
+    table.cells_merge(patient_name_sheet)
+    table.add_image(patient_name_sheet)
+    table.add_standart_text( patient_name_sheet)
+    table.create_border(patient_name_sheet)
+    table.table_border( patient_name_sheet, str(14))
 
     patient_name_sheet['B9'] = patient_list[i].name
     stp_row = 14
-    Table.footer('',patient_name_sheet, footer_row)
+    table.footer(patient_name_sheet, footer_row)
     patient_name_sheet['D' + footer_row ] = date_test.strftime("%d/%m/%Y")
     patient_name_sheet['H' + footer_row] = doc_name
     
     for j in range(len(patient_list[i].tests)):
         stp_row += 1
         stp_row_str = str(stp_row )
-        Table.table_merge('',patient_name_sheet, stp_row_str)
-        Table.table_border('',patient_name_sheet, stp_row_str)
+        table.table_merge(patient_name_sheet, stp_row_str)
+        table.table_border(patient_name_sheet, stp_row_str)
         patient_name_sheet['A' + stp_row_str] = tests_dick[patient_list[i].tests[j]][0]
         patient_name_sheet['A' + stp_row_str].font = ft[2]
         patient_name_sheet['E' + stp_row_str] = patient_list[i].results[j]
