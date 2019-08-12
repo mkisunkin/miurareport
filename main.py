@@ -6,7 +6,7 @@ from testxls import wb, ft, fill, al
 from testxls import Table
 import testxls
 from report import patient_list, num_pat, latest_file
-from other_const import table_symbol, tests_dick
+from other_const import table_symbol, tests_dick, path_report
 import datetime
 import os
 import glob
@@ -16,6 +16,13 @@ table = Table()
 
 wb = Workbook()
 ws0 = wb.active
+
+
+'''Проверка на наличие папки для отчета'''
+
+if not os.path.isdir(path_report):
+    os.makedirs(path_report)
+
 
 print('Введите имя врача: ')
 doc_name = input()
@@ -116,7 +123,7 @@ for i in range(count_pat):
     sheets.append(patient_name_sheet)
 
 file_name = latest_file[23:-3]
-report_file_name = 'rep/ ' + file_name + 'xlsx'
+report_file_name = 'rep/' + file_name + 'xlsx'
 print(report_file_name)
 print('Готово')
 

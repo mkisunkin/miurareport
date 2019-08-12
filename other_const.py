@@ -35,6 +35,8 @@ tests_dick = {
 
 table_symbol = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
 
+path_report = 'C:/python/miura/miurareport/rep'
+
 
 '''
     AbbreviatedName
