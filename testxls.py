@@ -81,6 +81,7 @@ def create_image(name):
 ''' создание рамки таблицы'''
 def border_table(rows_table):
         rows_table_str = str(rows_table)
+        
 
 
 '''Рамка'''
