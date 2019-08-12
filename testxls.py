@@ -78,6 +78,9 @@ def create_image(name):
     img = Image('image002.png')
     ws.add_image(img, 'A1')
 
+''' создание рамки таблицы'''
+def border_table(rows_table):
+        rows_table_str = str(rows_table)
 
 
 '''Рамка'''
