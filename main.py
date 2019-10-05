@@ -123,7 +123,7 @@ for i in range(count_pat):
     sheets.append(patient_name_sheet)
 
 file_name = latest_file[23:-3]
-report_file_name = 'rep/' + file_name + 'xlsx'
+report_file_name = 'c:/rep/' + file_name + 'xlsx'
 print(report_file_name)
 print('Готово')
 
